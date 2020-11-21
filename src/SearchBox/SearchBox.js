@@ -6,16 +6,26 @@ class SearchBox extends React.Component{
     }
 
     render() {
+        let style = {
+            marginTop: "50%"
+        }
+        if(this.props.currentSearch){
+            style = {
+                marginTop: 0
+            }
+        }
+
         return(
-         <div>
-             <form>
-                 <input name={'bookSearch'}
+         <div style={style} className={"mbottom search"}>
+             <form className={"center"}>
+                 <h1>Book Search</h1>
+                 <input className={"inputField"} name={'bookSearch'}
                         type={'text'}
                         placeholder={'what do you want to read?'}
                         value={this.props.value}
                         onChange={this.props.onChange}
                  />
-                 <input type={'submit'} value={'search'} onClick={this.props.onClick}/>
+                 <input className={"submitButton"} type={'submit'} value={'search'} onClick={this.props.onClick}/>
              </form>
          </div>
         )

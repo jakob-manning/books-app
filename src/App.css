@@ -1,38 +1,94 @@
-.App {
-  text-align: center;
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid dimgray; /* Blue */
+    border-radius: 50%;
+    width: 110px;
+    height: 110px;
+    animation: spin 1.5s linear infinite;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.center{
+    display: block;
+    margin: auto;
+    text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.mtop {
+    padding-top: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.mbottom{
+    padding-bottom: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.padding-L{
+    padding: 50px;
+}
+
+.subTitle{
+    font-weight: lighter;
+    font-style: italic;
+}
+
+a {
+    text-decoration: none;
+    font-weight: lighter;
+    color: #282c34;
+}
+
+h1 {
+    font-family: 'Dancing Script', cursive;
+}
+
+.search {
+    display: block;
+    margin: auto;
+    width: 100%;
+}
+
+.wrapper{
+    max-width: 500px;
+    margin: auto;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.gray{
+    color: gray;
+}
+
+.more{
+    font-style: italic;
+}
+
+.padding-left{
+    padding-left: 5px;
+}
+
+input {
+    font-family: 'Montserrat', sans-serif;
+}
+
+.submitButton {
+    background-color: darkslategrey;
+    border: none;
+    color: ghostwhite;
+    padding: 5px 10px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.inputField {
+    background-color: ghostwhite;
+    border: none;
+    color: darkslategrey;
+    padding: 5px 10px;
+    text-decoration: none;
+    margin: 4px 2px;
+    cursor: pointer;
 }

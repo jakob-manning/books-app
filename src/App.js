@@ -39,7 +39,6 @@ class App extends React.Component{
     }
 
     //axios http request
-    //TODO: trim search term and check if it's worth searching
     axiosRequest = (searchTerm) => {
         axios.get('https://www.googleapis.com/books/v1/volumes?q=' + searchTerm)
             .then(response => {
@@ -65,12 +64,12 @@ class App extends React.Component{
 
     render(){
         return(
-            <div>
-                <h1>Book Search</h1>
+            <div className={"wrapper"}>
                 <SearchBox
                     value={this.state.bookSearch}
                     onChange={this.handleChange}
                     onClick={this.handleSubmit}
+                    currentSearch={this.state.currentSearch}
                 />
                 <SearchResponse
                     searchData={this.state.searchResponse}

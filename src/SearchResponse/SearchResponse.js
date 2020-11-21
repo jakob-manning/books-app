@@ -3,6 +3,17 @@ import React from 'react'
 class SearchResponse extends React.Component{
     constructor(props) {
         super(props);
+        this.state = {
+            expandedDivs: {}
+        }
+    }
+
+    expandHandler = (id) => {
+        let expandedDivs = {...this.state.expandedDivs}
+        expandedDivs[id] = true
+        this.setState({
+            expandedDivs
+        })
     }
 
     render() {
@@ -10,15 +21,17 @@ class SearchResponse extends React.Component{
 
         if(this.props.loading){
             return (
-                <div className="loader"></div>
+                <div className={"padding-L"}>
+                    <div className="loader center"> </div>
+                </div>
             )
         }
 
         if(this.props.searchError){
             return(
-                <div>
-                    <h1>Search Response</h1>
-                    <p>No books found for "{this.props.searchError}"</p>
+                <div className={"center gray"}>
+                    <h3>Search Error</h3>
+                    <p className={"subTitle"}>No books found for "{this.props.searchError}"</p>
                 </div>
             )
         }
@@ -29,16 +42,33 @@ class SearchResponse extends React.Component{
                 try {imageURL = data.volumeInfo.imageLinks.smallThumbnail}
                 catch {imageURL = 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/No_image_available.svg/200px-No_image_available.svg.png'} //no image
 
+                let description = ''
+                if(this.state.expandedDivs[data.id]){
+                    description = <p onClick={this.expandHandler.bind(this,data.id)}> {data.volumeInfo.description}</p>
+                }
+                else{
+                    try{description =
+                        <p onClick={this.expandHandler.bind(this,data.id)}>
+                            {data.volumeInfo.description.split(' ').slice(0, 20).join(' ')}
+                            <a className={"more"}> ... (more)</a>
+                        </p>}
+                    catch{ }
+                }
+
+
                 console.log(data)
                 console.log(data.id)
+                // TODO add a 'read more button' to expand the description text.
                 return(
                     responses.push(
-                        <div key={data.id}>
-                            <a href={data.volumeInfo.previewLink}> {data.volumeInfo.title} </a>
-                            <p> {data.volumeInfo.description} </p>
-                            <p> {data.volumeInfo.categories}</p>
-                            <img src={imageURL}
-                                 alt={'smallThumbnail'} />
+                        <div className={"mtop padding-left"} key={data.id}>
+                            <a href={data.volumeInfo.previewLink}>
+                                <img className={"center"} src={imageURL} alt={'smallThumbnail'} />
+                                <br />
+                                <h3 className={"center"}>{data.volumeInfo.title}</h3>
+                            </a>
+                            <p className={"subTitle"}> {data.volumeInfo.categories}</p>
+                            {description}
                         </div>
                     )
                 )
@@ -47,7 +77,6 @@ class SearchResponse extends React.Component{
 
         return(
             <div>
-                <h1>Search Response</h1>
                 <div>{responses}</div>
             </div>
         )
